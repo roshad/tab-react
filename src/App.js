@@ -1,15 +1,25 @@
-import React from "react";
-import Tabs from "./components/Tabs";
+import React, { useState } from "react";
+
 import "./App.css";
 
 function App() {
+  const [state, setState] = useState({
+      tabs: ["tab1", "tab2", "tab3"],
+      selected: "tab1"
+    }),
+    handleClick = (tab) => {
+      setState({ ...state, selected: tab });
+    };
+
   return (
     <div>
-      <Tabs>
-        <div label="Gator">tab1</div>
-        <div label="Croc">tab2</div>
-        <div label="Sarcosuchus">tab3</div>
-      </Tabs>
+      {state.tabs.map((tab) => (
+        <div onClick={() => handleClick(tab)} key={tab}>
+          {tab}
+        </div>
+      ))}
+      <div>{state.selected}</div>
+      {/* state.selected换成com，在com里面判断，就做成tab了 */}
     </div>
   );
 }
